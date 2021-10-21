@@ -1,0 +1,172 @@
+1.List the department without any employees in it.
+
+  SELECT *
+  FROM dept
+  WHERE deptno NOT IN (SELECT deptno FROM emp) ;
+
+2.List the name and job of the employees who does not report to anybody.
+
+     SELECT * 
+     FROM EMP
+     WHERE MGR IS NULL;
+3.Write a query that will give you the names and jobs of all employees in New York with a commission above 1000
+
+      SELECT ename , job
+      FROM emp
+      WHERE comm>1000 AND deptno 
+      IN(SELECT deptno FROM dept 
+      WHERE loc = 'new yark');
+
+4.How many employees work in Chicago?
+
+        SELECT count( ename) AS 'NO OF WORKERS WORKING INCHICAGO'
+        FROM emp
+        WHERE deptno 
+        IN (SELECT deptno FROM dept 
+        WHERE loc='chicago');
+
+5.Which employees work in Chicago?
+
+  SELECT  ename AS 'EMPLOYEES WORKING IN CHICAGO'
+  FROM emp
+  WHERE deptno 
+  IN (SELECT deptno FROM dept 
+  WHERE loc='chicago');
+
+6.List the employees’ names and cities in which they work. Order the list by city.
+
+
+    SELECT  ename , LOC 
+    FROM EMP E,
+    DEPT D 
+    WHERE E.DEPTNO=D.DEPTNO
+    ORDER By LOC;
+
+7.Find the number of employees and number of departments.
+
+    
+   SELECT COUNT (ename) AS 'NO OF EMPLOYEES', COUNT (dname) AS 'NO OF DEPARTMENTS'
+   FRom EMP E,DEPT D
+   WHERE E.deptno=D.deptno;
+
+8.Display the employees who were hired before their managers.
+
+     SELECT E.ENAME ,M.ENAME AS 'MANAGER',M.HIREDATE AS 'MANAGER  HIRE DATE',E.HIREDATE
+     FROM EMP E,EMP M
+     WHERE E.MGR=M.EMPNO AND E.HIREDATE<M.HIREDATE;
+9.Determine the number of managers without listing them.
+
+      SELECT COUNT(*) AS 'NO OF MANAGERS'
+      FROM EMP
+      WHERE JOB='MAnAGER';
+
+10.Display the name and title of all employees who do not have a manager.
+
+    SELECT ename , job
+    FROM emp
+    WHERE MGR IS NULL;
+
+11.Create a query to display the employee name and department number for employee SMITH.
+
+     SELECT ename , deptno
+     FROM emp
+     WHERE ename='smith';
+
+12.Display the salesmen who are not in Boston
+
+   SELECT *
+   FROM emp
+   WHERE job='salesman' AND deptno NOT IN (SELECT deptno
+   FROM dept
+   WHERE loc='boston');
+
+13.List the details of the employees along with their location
+
+
+     SELECT E.EMPNO ENO
+     ,E.ENAME    EMPNAME
+     ,E.JOB      DESG
+     ,E.SAL      SLY
+     ,E.HIREDATE JOINDATE
+     ,E.DEPTNO   DNO
+     ,D.DNAME    DNAME
+     ,D.LOC      LOC
+     FROM EMP E,
+     DEPT D
+     WHERE E.DEPTNO=D.DEPTNO;
+
+14.List the salesmen who are drawing salary less than Miller
+
+    SELECT * FROM emp
+    WHERE job IN
+   (SELECT job FROM emp
+   WHERE job='salesman')
+   AND sal<(SELECT sal FROM emp
+   WHERE ename='miller');
+
+15.Display the details of the employee working in Chicago
+
+     SELECT * FROM EMP 
+     WHERE DEPTNO
+     IN (SELECT DEPTNO 
+     FROM DEPT
+     WHERE LOC='CHICAGO');
+
+16.Find the names of all employees whose salaries are greater than the minimum salary for the Manager
+
+   SELECT ENAME 
+   FROM EMP
+    WHERE SAL<
+                 (SELECT MIN(SAL)
+		  FROM EMP
+		  WHERE JOB='MANAGER'); 
+
+17.Select the last name and job id from all employees whose department id is equal to Accounting.
+    SELECT ENAME , SAL,JOB,E.DEPTNO
+    FROM EMP E
+   JOIN DEPT D
+   ON D.DEPTNO=E.DEPTNO AND
+   D.DNAME='ACCOUNTING' ;
+     
+18.Display those emp who are working as manager
+
+     SELECT ENAME 
+     FROM EMP
+     WHERE JOB='MANAGER';
+
+19.write a subquery using case statement to display non sales if department is not sales
+
+  SELECT DNAME 
+  CASE WHEN DNAME!='SALES'
+  THEN 'NOT SALE'
+  ELSE 'SALE'
+ END AS CASE1 
+  FROM DEPT ;
+
+
+  
+
+20.If salary of an employee is more than 1000, then display salary otherwise display 1000
+
+    SELECT SAL , CASE WHEN
+    SAL>1000 THEN 'GREATER
+    THAN 1000'
+    ELSE '1000' END AS
+   'COMPARISION'
+    FROM EMP 
+21.Display salary as low, medium high based on salary range
+Less than 1000 less
+1000 to 2500 medium
+More than 2500 high
+
+
+  SELECT SAL ,CASE WHEN SAL<1000
+  THEN 'LOW'
+  WHEN SAL>=1000 AND
+  SAL<=2500
+  THEN 'MEDIUM'
+  ELSE 'HIGH' END AS
+  'COMPARISION'
+  FROM EMP
+
+
