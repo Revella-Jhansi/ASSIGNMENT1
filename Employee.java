@@ -1,16 +1,24 @@
-package com.sonata.assignments3;
+package com.sonata.assignment4;
 
+class Employee implements Comparable<Employee>{
+    long employeeId;
+    String employeeName;
+    double employeeSalary;
+    
+    //generate compareTo and hashcode methods
+    
+    Employee(long employeeId, String employeeName,double employeeSalary)
+    {
+        this.employeeId=employeeId;
+        this.employeeName=employeeName;
+        this.employeeSalary=employeeSalary;
+    }
 
-public abstract class Employee {
-
-		long employeeid;
-		String employeeName;
-		Address address;
-		double basicpay;
-		
-		 abstract double calculatesalary();
-
+	@Override
+	public int compareTo(Employee o) {
+		// TODO Auto-generated method stub
+		if(o.employeeId==this.employeeId)
+			return 0;
+			else return 1;
 	}
-
-
-
+}
