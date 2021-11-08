@@ -1,40 +1,42 @@
-package com.sonata;
+package com.sonata.assignment4;
 
+import java.util.Objects;
 
-
-public class Student {
-	
-		
-		int sid;
-		String sname;
-		int sclass;
-		 
-		Student(){}
-		Student(int id,String name, int cls){
-			this.sid=id;
-			this.sname=name;
-			this.sclass=cls;
-			
-		}
-		public void display() {
-			System.out.println(sid);
-			System.out.println(sname);
-			System.out.println(sclass);
-
-			
-		}
-		 public static void main(String [] args) {
-			 Student s1=new Student();
-			 s1.sid=1;
-			 s1.sname="jan";
-			 s1.sclass=9;
-			 s1.display();
-			 Student s2= new Student(2,"jyo",8);
-			 s2.display();
-			 
-			 
-		 }
-
+class Student implements Comparable
+{
+  String studentName;
+  int studentTotalMarks;
+    Student (String strudentName, int studentTotalMarks)
+  {
+    this.studentName = strudentName;
+    this.studentTotalMarks = studentTotalMarks;
+  }
+  //generate compareTo and hashcode , toString methods based on studentTotalMarks
+	@Override
+	public int hashCode() {
+		return Objects.hash(studentTotalMarks);
 	}
-
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Student other = (Student) obj;
+		return studentTotalMarks == other.studentTotalMarks;
+	}
+	@Override
+	public String toString() {
+		return "Student [studentTotalMarks=" + studentTotalMarks + "]";
+	}
+	@Override
+	public int compareTo(Object o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	
+}
 
